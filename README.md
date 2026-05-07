@@ -46,10 +46,10 @@ Or download individual archives:
 
 | Archive | Contents | Size | Link |
 |---------|----------|------|------|
-| `opendeepfake_faces.zip` | 1,375 face images | ~1.3 GB | [Download](https://drive.google.com/uc?id=GDRIVE_FACES_ID&export=download) |
-| `opendeepfake_scenes.zip` | 688 scene images | ~0.7 GB | [Download](https://drive.google.com/uc?id=GDRIVE_SCENES_ID&export=download) |
-| `opendeepfake_nature.zip` | 687 nature/context images | ~0.7 GB | [Download](https://drive.google.com/uc?id=GDRIVE_NATURE_ID&export=download) |
-| `opendeepfake_metadata.zip` | prompts.jsonl · prompts.csv · manifest.jsonl · README | ~3 MB | [Download](https://drive.google.com/uc?id=GDRIVE_METADATA_ID&export=download) |
+| `opendeepfake_faces.zip` | 1,375 face images | ~1.3 GB | [Download](https://drive.google.com/uc?id=1_VjZA1cZ-vn9_dBm-qcqy03eBHkRGxbX&export=download) |
+| `opendeepfake_scenes.zip` | 688 scene images | ~0.7 GB | [Download](https://drive.google.com/uc?id=1291y6NaAn6k5Htn3vvp8XwWy_sbFQetk&export=download) |
+| `opendeepfake_nature.zip` | 687 nature/context images | ~0.7 GB | [Download](https://drive.google.com/uc?id=1sUmbidTSfMjr7ddEfITftGWJBDmmY-OB&export=download) |
+| `opendeepfake_metadata.zip` | prompts.jsonl · prompts.csv · manifest.jsonl · README | ~3 MB | [Download](https://drive.google.com/uc?id=1hPUIa7OU9PP4QFOMrsN4k8MkaxQEwN5U&export=download) |
 
 > Metadata files (`prompts.jsonl`, `manifest.jsonl`) are also committed directly to this repository.
 

@@ -21,25 +21,25 @@ from pathlib import Path
 # ── Drive file IDs (updated automatically by update_links.py after upload) ──
 FILES = {
     "faces": {
-        "id":       "GDRIVE_FACES_ID",
+        "id":       "1_VjZA1cZ-vn9_dBm-qcqy03eBHkRGxbX",
         "filename": "opendeepfake_faces.zip",
         "dest":     Path("images/faces"),
         "size":     "~1.4 GB",
     },
     "scenes": {
-        "id":       "GDRIVE_SCENES_ID",
+        "id":       "1291y6NaAn6k5Htn3vvp8XwWy_sbFQetk",
         "filename": "opendeepfake_scenes.zip",
         "dest":     Path("images/scene"),
         "size":     "~0.8 GB",
     },
     "nature": {
-        "id":       "GDRIVE_NATURE_ID",
+        "id":       "1sUmbidTSfMjr7ddEfITftGWJBDmmY-OB",
         "filename": "opendeepfake_nature.zip",
         "dest":     Path("images/nature"),
         "size":     "~0.8 GB",
     },
     "metadata": {
-        "id":       "GDRIVE_METADATA_ID",
+        "id":       "1hPUIa7OU9PP4QFOMrsN4k8MkaxQEwN5U",
         "filename": "opendeepfake_metadata.zip",
         "dest":     Path("."),
         "size":     "~3 MB",
