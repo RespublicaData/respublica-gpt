@@ -1,26 +1,29 @@
-# Dataset images — too large for git, hosted on Google Drive
-images/
+# Internal tooling
+config.py
+generate_images.py
+export_csv.py
+package.py
+upload_gdrive.py
+update_links.py
+manifest.jsonl
+requirements.txt
+CITATION.cff
+LICENSE
 
-# Packaged archives
-dist/
-
-# Google Drive OAuth credentials — never commit these
+# Credentials
 credentials.json
 token.json
 
-# Generation state — not needed in repo
+# Generation state
 progress.json
+
+# Images and archives
+images/
+dist/
 
 # Python
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-.Python
-env/
-venv/
-.env
-.venv/
-
-# macOS
 .DS_Store
