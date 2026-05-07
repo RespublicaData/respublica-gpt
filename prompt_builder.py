@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+real#!/usr/bin/env python3
 """
 respublica-gpt — Structured Prompt Generator (TRIED-Aligned)
 
