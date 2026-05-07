@@ -233,3 +233,4 @@ If you use respublica-gpt in your research, please cite both this dataset and th
 
 Permitted: deepfake detection model training and evaluation, academic research, benchmarking.  
 Not permitted: generating deceptive content, surveillance, biometric identification, or commercial use without explicit written permission.
+# Respublica_GPT
