@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -m py_compile package.py)",
+      "Bash(python3 -m py_compile upload_gdrive.py)",
+      "Bash(python3 -m py_compile download.py)",
+      "Bash(python3 -m py_compile update_links.py)",
+      "WebFetch(domain:docs.x.ai)",
+      "WebSearch"
+    ]
+  }
+}
