@@ -2,13 +2,14 @@
 
 # respublica-gpt
 
-**A demographically diverse corpus of AI-generated images for deepfake detection research**
+**3,000 AI-generated images for deepfake detection research**
 
-Built with OpenAI `gpt-image-2` · April–May 2026
+Built with OpenAI `gpt-image-2` (April 2026) · Aligned with the [WITNESS TRIED Benchmark](https://arxiv.org/abs/2504.21489)
 
 [![License: Research Only](https://img.shields.io/badge/license-Research%20Only-red.svg)](LICENSE)
-[![Images](https://img.shields.io/badge/images-2%2C797-blue.svg)]()
+[![Images](https://img.shields.io/badge/images-3%2C000-blue.svg)]()
 [![Model](https://img.shields.io/badge/model-gpt--image--2-10a37f.svg)](https://openai.com/gpt-image-2)
+[![TRIED Aligned](https://img.shields.io/badge/TRIED%20Benchmark-Aligned-orange.svg)](https://arxiv.org/abs/2504.21489)
 [![Formats](https://img.shields.io/badge/formats-JPEG%20%7C%20PNG%20%7C%20WebP-lightgrey.svg)]()
 [![Size](https://img.shields.io/badge/size-~3%20GB-informational.svg)]()
 
@@ -16,38 +17,26 @@ Built with OpenAI `gpt-image-2` · April–May 2026
 
 ---
 
-## Why This Dataset Exists
+## Overview
 
-Deepfake detection research has a representation problem.
+respublica-gpt is a **factorized, TRIED-aligned dataset** of 3,000 synthetic images generated using OpenAI's most capable image model. Every image is paired with full structured metadata — model quality, format, compression level, camera style, lighting, demographic attributes, platform degradation, and more — making it uniquely suited for training and benchmarking deepfake detection systems.
 
-Most synthetic image datasets — and the detectors trained on them — skew heavily toward Western subjects, lighter skin tones, and studio-quality photography. The result is a well-documented pattern: **detection systems fail disproportionately on faces from the Global Majority**. A tool that reliably catches AI-generated images of white faces in good lighting may miss the same manipulation applied to a dark-skinned face photographed under a streetlight, shared over WhatsApp, and viewed on a low-end phone.
-
-This failure isn't just a technical shortcoming. Deepfake misinformation disproportionately targets political figures, activists, and communities in the Global South. If the detectors meant to catch it work best on the faces least likely to be targeted, the technology fails the people who need it most.
-
-respublica-gpt is built to address that gap directly. Every axis of the prompt taxonomy — ethnicity, skin tone, lighting, camera quality, platform degradation — is designed to stress-test detection systems across the full range of real-world conditions, not just the ones that happen to be well-represented in existing benchmarks.
-
----
-
-## Dataset Overview
-
-| | |
-|---|---|
-| **Total images** | 2,797 |
+| Stat | Value |
+|------|-------|
+| **Total images** | 3,000 |
 | **Categories** | Face (50%) · Scene (25%) · Nature/context (25%) |
-| **Ethnicities** | 20 — Arab, Bengali, Brazilian, Chinese, East African, Filipino, German, Haitian, Indian, Indonesian, Iranian, Japanese, Korean, Mexican, Nigerian, Pakistani, Peruvian, Russian, Turkish, Vietnamese |
-| **Skin tones** | 7 (Fitzpatrick I through VI) |
-| **Age groups** | 5 (child through elderly) |
-| **Camera styles** | 14 (DSLR through CCTV through dashcam) |
-| **Quality levels** | Equal thirds: Low · Medium · High |
 | **Formats** | Equal thirds: JPEG · PNG · WebP |
+| **Quality levels** | Equal thirds: Low · Medium · High |
 | **Generation model** | `gpt-image-2` (OpenAI, April 2026) |
 | **Metadata per image** | 10+ structured fields |
+| **Combinatorial space** | ~236 billion unique face prompts |
+| **Benchmark alignment** | WITNESS TRIED §5.1, §5.2, §5.4 |
 
 ---
 
 ## Download
 
-Images are hosted on Google Drive (~3 GB total). One-command download:
+Images are hosted on Google Drive due to size (~3 GB total). Use the helper script for a one-command download:
 
 ```bash
 pip install gdown tqdm
@@ -58,84 +47,37 @@ Or download individual archives:
 
 | Archive | Contents | Size | Link |
 |---------|----------|------|------|
-| `opendeepfake_faces.zip` | ~1,400 face images | ~1.4 GB | [Download](https://drive.google.com/uc?id=GDRIVE_FACES_ID&export=download) |
-| `opendeepfake_scenes.zip` | ~700 scene images | ~0.8 GB | [Download](https://drive.google.com/uc?id=GDRIVE_SCENES_ID&export=download) |
-| `opendeepfake_nature.zip` | ~700 nature/context images | ~0.8 GB | [Download](https://drive.google.com/uc?id=GDRIVE_NATURE_ID&export=download) |
-| `opendeepfake_metadata.zip` | prompts.jsonl · prompts.csv · manifest.jsonl | ~3 MB | [Download](https://drive.google.com/uc?id=GDRIVE_METADATA_ID&export=download) |
+| `opendeepfake_faces.zip` | 1,500 face images | ~1.4 GB | [Download](https://drive.google.com/uc?id=GDRIVE_FACES_ID&export=download) |
+| `opendeepfake_scenes.zip` | 750 scene images | ~0.8 GB | [Download](https://drive.google.com/uc?id=GDRIVE_SCENES_ID&export=download) |
+| `opendeepfake_nature.zip` | 750 nature/context images | ~0.8 GB | [Download](https://drive.google.com/uc?id=GDRIVE_NATURE_ID&export=download) |
+| `opendeepfake_metadata.zip` | prompts.jsonl · prompts.csv · manifest.jsonl · README | ~3 MB | [Download](https://drive.google.com/uc?id=GDRIVE_METADATA_ID&export=download) |
 
-> `prompts.jsonl` and `prompts.csv` are also committed directly to this repository.
-
----
-
-## Diversity Design
-
-### Demographic coverage
-
-The face subset (50% of the dataset) is built around 20 ethnicities drawn primarily from the Global Majority, combined with 7 skin tone levels to ensure coverage of the tones where detector bias is most pronounced. Gender presentation (man, woman, androgynous person) and age (child through elderly) are sampled uniformly.
-
-The goal is not token representation — it is **stress coverage**. Each ethnicity × skin tone combination should appear across the full range of lighting conditions, camera qualities, and artifact levels, so that a detector's failure on dark skin in low light is detectable as a failure mode rather than hidden by aggregate accuracy.
-
-### Platform degradation
-
-Real-world deepfakes don't circulate as pristine PNGs. They are screenshotted, re-encoded by WhatsApp, reposted through TikTok's compression pipeline, and viewed on devices with inconsistent color profiles. respublica-gpt encodes this directly: 9 platform degradation conditions (WhatsApp, Instagram, TikTok, Telegram, Twitter/X, and others) are applied at the prompt level, producing images that simulate how synthetic media actually looks by the time a detector sees it.
-
-### Scene diversity
-
-The 25% scene subset includes global contexts — Lagos markets, Mumbai classrooms, Bangkok protests, Mexico City courthouses — rather than defaulting to Western environments. A detector that learns "political rally" from US footage may perform differently on a similar scene shot at a different latitude.
+> Metadata files (`prompts.jsonl`, `manifest.jsonl`) are also committed directly to this repository.
 
 ---
 
-## Prompt Taxonomy
-
-All prompts are factorized across **11 detection-relevant axes**. Full metadata for every image is in `prompts.jsonl` (nested) and `prompts.csv` (flat, one column per axis — opens directly in Excel or Sheets).
-
-### Face axis coverage
-
-| Axis | Count | Values (sample) |
-|------|-------|-----------------|
-| Ethnicity | 20 | Arab, Bengali, East African, Filipino, Haitian, Indonesian... |
-| Skin tone | 7 | Fitzpatrick I (very light) → VI (very dark) |
-| Age | 5 | Child, young adult, middle-aged, older adult, elderly |
-| Gender presentation | 3 | Man, woman, androgynous person |
-| Camera style | 14 | DSLR, iPhone, CCTV, dashcam, webcam, film grain, polaroid... |
-| Lighting | 14 | Natural, neon, fluorescent, candlelight, screen-lit, golden hour... |
-| Background | 16 | Studio, home interior, office, urban street, rural farmland... |
-| Artifact | 14 | Clean, slight blur, heavy JPEG, rolling shutter, noise, overexposed... |
-| Edge case | 22 | Occlusion, reflection, crowd, partial shadow, extreme close-up... |
-| Platform degradation | 9 | WhatsApp, Instagram, TikTok, Telegram, Twitter/X, none |
-| Cultural context | 13 | Traditional attire, hijab, turban, religious garment, military... |
-
-### Scene / nature axis coverage
-
-| Axis | Count | Values (sample) |
-|------|-------|-----------------|
-| Scene subject | 25 | Political rally, market, classroom, protest, wedding, courtroom... |
-| Camera style | 14 | Documentary, broadcast news, dashcam, drone, CCTV, HDR... |
-| Lighting | 14 | Golden hour, neon, screen-lit, fluorescent, candlelight... |
-| Artifact | 14 | JPEG compression, motion blur, overexposure, noise, rolling shutter... |
-| Platform degradation | 9 | WhatsApp, TikTok, Instagram, Twitter/X, screenshotted, none |
-
----
-
-## Repository Structure
+## Dataset Structure
 
 ```
 respublica-gpt/
-├── images/                    # Downloaded separately (see above)
-│   ├── faces/
-│   ├── scene/
-│   └── nature/
-├── prompts.jsonl              # All prompts + full structured metadata
-├── prompts.csv                # Same data, flat — one column per axis
-├── manifest.jsonl             # Per-image generation record
-├── download.py                # Dataset downloader
-├── prompt_builder.py          # Prompt generator — reproduce or extend the taxonomy
-├── generate_images.py         # Async generation pipeline
-├── export_csv.py              # Regenerate prompts.csv from prompts.jsonl
-├── package.py                 # Build zip archives for Drive upload
-├── upload_gdrive.py           # Upload archives to Google Drive
-├── update_links.py            # Patch Drive file IDs into README + download.py
-└── config.py                  # Generation configuration
+├── images/
+│   ├── faces/          # 1,500 face-centered images
+│   ├── scene/          # 750 group/context scene images
+│   └── nature/         # 750 nature/environmental images
+├── prompts.jsonl       # All 3,000 prompts + structured metadata (source of truth)
+├── prompts.csv         # Same data, flattened — one column per axis, opens in Excel/Sheets
+├── manifest.jsonl      # Per-image generation record (timing, size, cost)
+├── download.py         # One-command dataset downloader
+├── prompt_builder.py   # TRIED-aligned prompt generator (reproduce prompts)
+├── generate_images.py  # Async generation pipeline (reproduce images)
+└── config.py           # Generation configuration
+```
+
+### File naming
+
+```
+{index:05d}_{category}.{format}
+# e.g. 00042_face.jpeg, 01337_scene.png, 02500_nature.webp
 ```
 
 ### Metadata schema
@@ -151,10 +93,11 @@ Each line of `prompts.jsonl`:
   "compression": 85,
   "category": "face",
   "metadata": {
-    "ethnicity": "Middle Eastern",
-    "skin_tone": "medium-dark skin",
+    "category": "face",
     "age": "middle-aged",
     "gender_presentation": "person",
+    "ethnicity": "Middle Eastern",
+    "skin_tone": "medium-dark skin",
     "lighting": "harsh overhead fluorescent",
     "background": "office interior",
     "photo_type": "security camera CCTV footage",
@@ -165,55 +108,120 @@ Each line of `prompts.jsonl`:
 }
 ```
 
+Each line of `manifest.jsonl` additionally includes:
+
+```json
+{
+  "filename": "00042_face.jpeg",
+  "file_size_bytes": 145302,
+  "generation_time_s": 84.2,
+  "timestamp": "2026-05-01T12:34:56Z"
+}
+```
+
+---
+
+## Prompt Taxonomy
+
+Prompts are factorized across **11 detection-relevant axes**. Every axis value is recorded in metadata, enabling fine-grained stratified evaluation.
+
+### Face images (1,500)
+
+| Axis | Values | Count |
+|------|--------|-------|
+| **Ethnicity** | Arab, Bengali, Brazilian, Chinese, East African, Filipino, German, Haitian, Indian, Indonesian, Iranian, Japanese, Korean, Mexican, Nigerian, Pakistani, Peruvian, Russian, Turkish, Vietnamese | 20 |
+| **Skin tone** | Fitzpatrick I–VI (very light → very dark) | 7 |
+| **Age** | Child, young adult, middle-aged, older adult, elderly | 5 |
+| **Gender presentation** | Man, woman, androgynous person | 3 |
+| **Camera style** | DSLR, iPhone, CCTV, dashcam, webcam, screen recording, polaroid, film grain... | 14 |
+| **Lighting** | Natural, neon, fluorescent, candlelight, screen-lit, golden hour, low ambient... | 14 |
+| **Background** | Studio, home interior, office, urban street, rural farmland, place of worship... | 16 |
+| **Artifact** | Clean, slight blur, heavy JPEG, rolling shutter, noise/grain, overexposed... | 14 |
+| **Edge case** | Occlusion, reflection, crowd, partial shadow, off-angle, extreme close-up... | 22 |
+| **Platform degradation** | WhatsApp, Instagram, TikTok, Telegram, Twitter/X, none | 9 |
+| **Cultural context** | Traditional attire, hijab, turban, religious garment, military uniform... | 13 |
+
+### Scene & nature images (1,500)
+
+| Axis | Values | Count |
+|------|--------|-------|
+| **Scene subject** | Political rally, market, classroom, protest, wedding, subway, courtroom... | 25 |
+| **Camera style** | Documentary, broadcast news, dashcam, drone, CCTV, HDR, film grain... | 14 |
+| **Lighting** | Golden hour, neon, screen-lit, fluorescent, candlelight, overcast... | 14 |
+| **Artifact** | JPEG compression, motion blur, overexposure, noise, rolling shutter... | 14 |
+| **Platform degradation** | WhatsApp, TikTok, Instagram, Twitter/X, screenshotted, none | 9 |
+
+---
+
+## TRIED Benchmark Alignment
+
+This dataset is designed following the [WITNESS TRIED Benchmark](https://arxiv.org/abs/2504.21489) — a sociotechnical framework for evaluating AI detection tools.
+
+| TRIED Principle | How respublica-gpt Addresses It |
+|---|---|
+| **§5.4 Fairness** | 20 ethnic groups centering Global Majority; 7 skin tones (Fitzpatrick I–VI); balanced demographic sampling to stress-test bias documented in detection systems that underperform on non-Caucasian faces |
+| **§5.1 Real-World Conditions** | Platform degradation simulation (WhatsApp, Instagram, TikTok); diverse compression levels; low-resolution, screen-captured, and heavily formatted variants |
+| **§5.1 Diverse Training Data** | 14 camera styles spanning DSLR through dashcam through CCTV; 25 scene subjects from Lagos, Mumbai, Bangkok, Mexico City, Marrakech, Jakarta |
+| **§5.2 Transparency** | Full structured metadata per image (prompt, quality, format, compression, all axis values) published in `prompts.jsonl` for complete reproducibility |
+| **§5.4 Global Majority** | Scene subjects explicitly include global contexts — not defaulting to Western environments |
+
+---
+
+## Ethical Framework
+
+> **All images are entirely AI-generated.** No real person's likeness, biometric data, or identity is captured, referenced, or approximated.
+
+Demographic descriptors (ethnicity, skin tone, age, gender presentation) are used **solely to ensure balanced visual representation** in training data for detection research — specifically to counteract the documented failure of detectors on underrepresented groups.
+
+**Intended use:** Training and evaluating deepfake / synthetic media detection systems.
+
+**Prohibited use:** Generating deceptive content, surveillance, biometric identification, or any use that infringes on human rights or dignity.
+
+Researchers using this dataset are encouraged to read the [TRIED Benchmark](https://arxiv.org/abs/2504.21489) for a full sociotechnical framing of the detection problem.
+
 ---
 
 ## Reproducing the Dataset
 
-The full generation pipeline is included. You can regenerate all prompts deterministically or generate additional images with any compatible model.
+The full generation pipeline is included. You can reproduce all prompts deterministically and regenerate images with any compatible model.
 
 ```bash
-# Install
+# 1. Install
 pip install -r requirements.txt
 export OPENAI_API_KEY="sk-..."
 
-# Regenerate prompts (deterministic)
+# 2. Regenerate prompts (deterministic)
 python prompt_builder.py
 
-# Estimate cost before generating
+# 3. Estimate cost before generating
 python generate_images.py --dry-run
 
-# Generate — safe to interrupt and resume
+# 4. Generate (resumable — safe to interrupt)
 python generate_images.py
-
-# Export flat CSV from prompts.jsonl
-python export_csv.py
 ```
 
 **Approximate cost to reproduce:** ~$490 USD at April 2026 OpenAI pricing (low: $0.011/img · medium: $0.07/img · high: $0.041/img).
 
 ---
 
-## Ethical Statement
-
-> **All images are entirely AI-generated.** No real person's likeness, biometric data, or identity is captured, referenced, or approximated.
-
-Demographic descriptors (ethnicity, skin tone, age, gender presentation) exist exclusively to ensure that the dataset covers the range of human appearance that detection systems will encounter in practice — with particular emphasis on the groups where existing tools are documented to underperform.
-
-**Intended use:** Training and evaluating synthetic media detection systems. Academic research and benchmarking.
-
-**Prohibited use:** Generating deceptive content, surveillance, biometric identification, or any commercial or harmful application.
-
----
-
 ## Citation
 
+If you use respublica-gpt in your research, please cite both this dataset and the TRIED Benchmark:
+
 ```bibtex
-@dataset{respublicagpt2026,
-  title     = {respublica-gpt: A Demographically Diverse Synthetic Image Dataset for Deepfake Detection Research},
+@dataset{opendeepfake2026,
+  title     = {respublica-gpt: A TRIED-Aligned Synthetic Image Dataset for Deepfake Detection Research},
   author    = {RespublicaData},
   year      = {2026},
   url       = {https://github.com/RespublicaData/respublica-gpt},
-  note      = {2,797 images generated with OpenAI gpt-image-2}
+  note      = {3,000 images generated with OpenAI gpt-image-2}
+}
+
+@article{anlen2025tried,
+  title   = {TRIED: Truly Innovative and Effective AI Detection Benchmark},
+  author  = {anlen, shirin and Wojciak, Zuzanna},
+  journal = {arXiv preprint arXiv:2504.21489},
+  year    = {2025}
 }
 ```
 
@@ -221,4 +229,7 @@ Demographic descriptors (ethnicity, skin tone, age, gender presentation) exist e
 
 ## License
 
-Research use only. See [LICENSE](LICENSE).
+**Research use only.** See [LICENSE](LICENSE) for full terms.
+
+Permitted: deepfake detection model training and evaluation, academic research, benchmarking.  
+Not permitted: generating deceptive content, surveillance, biometric identification, or commercial use without explicit written permission.
